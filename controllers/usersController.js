@@ -1,4 +1,6 @@
 const { body, validationResult, matchedData } = require("express-validator");
+// const usersStorage = require("../model/usersStorage");
+const db = require("../db/queries");
 
 const validateUsername = body("username")
 	.trim()
@@ -11,10 +13,9 @@ const validateUsername = body("username")
 	.bail()
 	.isLength({ min: 3, max: 20 });
 
-const usersStorage = require("../model/usersStorage");
-
-exports.usersListGet = (req, res, next) => {
-	const users = usersStorage.getUsers();
+exports.usersListGet = async (req, res, next) => {
+	// const users = usersStorage.getUsers();
+	const users = await db.getAllUsernames();
 	console.log(users);
 	res.render("index.ejs", { users });
 };
@@ -25,7 +26,7 @@ exports.usersNewGet = (req, res, next) => {
 
 exports.usersNewPost = [
 	validateUsername,
-	(req, res, next) => {
+	async (req, res, next) => {
 		const error = validationResult(req);
 		if (!error.isEmpty()) {
 			res.status(400).render("newForm.ejs", {
@@ -36,7 +37,8 @@ exports.usersNewPost = [
 			return;
 		}
 		const { username } = matchedData(req, { locations: ["body"] });
-		usersStorage.createUser({ username });
+		// usersStorage.createUser({ username });
+		await db.insertUsername(username);
 		res.status(200).redirect("/");
 	},
 ];
