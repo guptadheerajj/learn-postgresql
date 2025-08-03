@@ -9,7 +9,8 @@
 		"lint:fix": "eslint . --fix",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
-		"lint-and-format": "npm run lint:fix && npm run format"
+		"lint-and-format": "npm run lint:fix && npm run format",
+		"populatedb": "node db/populatedb.js"
 	},
 	"repository": {
 		"type": "git",
