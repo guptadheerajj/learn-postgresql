@@ -8,11 +8,20 @@
 </head>
 
 <body>
-  <h1>Users:</h1>
 
+  <%- include("./partials/error.ejs") %>
+  <hr>
+  <form action="/" method="get">
+    <input type="text" name="search" id="search">
+    <button type=" submit">Search</button>
+  </form>
+
+  <hr>
+
+  <h1>Users:</h1>
   <ul>
     <% users.forEach(user => {%>
-    <li>Usernmae: <%= user.username %></li>
+    <li>Username: <%= user.username %></li>
     <%   }); %>
   </ul>
 

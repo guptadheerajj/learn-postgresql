@@ -12,7 +12,7 @@
   <%- include("./partials/error.ejs") %>
   <form action="/new" method="post">
     <label for="username">Username:</label>
-    <input type="text" value="<%= locals.username || '' %>" name="username" id="username" minlength="3" maxlength="20" required>
+    <input type="text" autofocus value="<%= locals.username || '' %>" name="username" id="username" minlength="3" maxlength="20" required>
     <button type="submit">Register!</button>
   </form>
   <a href="/">Back to home</a>
